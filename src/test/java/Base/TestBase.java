@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,9 +17,13 @@ import static io.github.bonigarcia.wdm.config.DriverManagerType.CHROME;
 import static io.github.bonigarcia.wdm.config.DriverManagerType.FIREFOX;
 
 public class TestBase {
-    protected static WebDriver driver;
-    public static WebDriverWait wait;
+    protected RemoteWebDriver driver;
+    public WebDriverWait wait;
     public Actions action;
+
+    public TestBase(){
+
+    }
 
     @BeforeClass
     @Parameters({"browser","url", "waitTime"})
