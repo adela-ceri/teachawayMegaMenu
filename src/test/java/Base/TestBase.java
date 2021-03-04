@@ -6,12 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
-import java.net.MalformedURLException;
 
 import static io.github.bonigarcia.wdm.config.DriverManagerType.CHROME;
 import static io.github.bonigarcia.wdm.config.DriverManagerType.FIREFOX;
@@ -19,11 +18,11 @@ import static io.github.bonigarcia.wdm.config.DriverManagerType.FIREFOX;
 public class TestBase {
     protected static WebDriver driver;
     public static WebDriverWait wait;
-    protected String URL = "https://www.teachaway.com";
+    public Actions action;
 
     @BeforeClass
-    @Parameters("browser")
-    public void launchBrowser(String browser) throws MalformedURLException {
+    @Parameters({"browser","url", "waitTime"})
+    public void launchBrowser(String browser, String url, String waitTime){
 
         if(browser.equalsIgnoreCase("chrome")){
             WebDriverManager.getInstance(CHROME).setup();
@@ -39,8 +38,9 @@ public class TestBase {
         }
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
-        driver.get(URL);
-        wait = new WebDriverWait(driver, 20);
+        driver.get(url);
+        wait = new WebDriverWait(driver, Integer.parseInt(waitTime));
+        action = new Actions(driver);
     }
 
     @AfterClass

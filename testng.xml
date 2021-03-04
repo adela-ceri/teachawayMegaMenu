@@ -4,6 +4,8 @@
 
     <test name="test case 1">
         <parameter name="browser" value="chrome"> </parameter>
+        <parameter name="url" value="https://www.teachaway.com"> </parameter>
+        <parameter name="waitTime" value="20"> </parameter>
         <classes>
             <class name="Tests.MegaMenu"></class>
         </classes>
